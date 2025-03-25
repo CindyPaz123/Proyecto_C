@@ -1,0 +1,56 @@
+#include <stdio.h>
+
+void convertirMoneda(float cantidad, char origen, char destino) {
+    float resultado;
+
+    if (origen == 'Q') { // De quetzales
+        if (destino == 'D') {
+            resultado = cantidad * 0.13; // Quetzales a dólares (1 Q = 0.13 USD aprox.)
+        } else if (destino == 'E') {
+            resultado = cantidad * 0.12; // Quetzales a euros (1 Q = 0.12 EUR aprox.)
+        }
+    } else if (origen == 'D') { // De dólares
+        if (destino == 'Q') {
+            resultado = cantidad * 7.85; // Dólares a quetzales (1 USD = 7.85 Q aprox.)
+        } else if (destino == 'E') {
+            resultado = cantidad * 0.93; // Dólares a euros (1 USD = 0.93 EUR aprox.)
+        }
+    } else if (origen == 'E') { // De euros
+        if (destino == 'Q') {
+            resultado = cantidad * 8.45; // Euros a quetzales (1 EUR = 8.45 Q aprox.)
+        } else if (destino == 'D') {
+            resultado = cantidad * 1.08; // Euros a dólares (1 EUR = 1.08 USD aprox.)
+        }
+    } else {
+        printf("Moneda de origen no válida.\n");
+        return;
+    }
+
+    if (origen == destino) {
+        printf("La moneda de origen y destino son iguales. El resultado es: %.2f\n", cantidad);
+    } else {
+        printf("El resultado de la conversión es: %.2f\n", resultado);
+    }
+}
+
+int main() {
+    char origen, destino;
+    float cantidad;
+
+    printf("Bienvenido al conversor de monedas.\n");
+    printf("Opciones de moneda: \n");
+    printf("Q: Quetzales\n");
+    printf("D: Dólares estadounidenses\n");
+    printf("E: Euros\n\n");
+
+    printf("Ingrese la moneda de origen (Q, D, E): ");
+    scanf(" %c", &origen);
+    printf("Ingrese la moneda de destino (Q, D, E): ");
+    scanf(" %c", &destino);
+    printf("Ingrese la cantidad a convertir: ");
+    scanf("%f", &cantidad);
+
+    convertirMoneda(cantidad, origen, destino);
+
+    return 0;
+}
